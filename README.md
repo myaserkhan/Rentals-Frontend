@@ -1,70 +1,173 @@
-# Getting Started with Create React App
+![](https://img.shields.io/badge/Microverse-blueviolet)
+<a name="readme-top"></a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 📗 Table of Contents
+- [📗 Table of Contents](#-table-of-contents)
+- [📖 Rentals Frontend](#about-the-project)
+  - [🛠 Built With ](#-built-with-)
+    - [Tech Stack ](#tech-stack-)
+    - [Key Features ](#key-features-)
+  - [🚀 Live Demo ](#-live-demo-)
+  - [💻 Getting Started ](#-getting-started-)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+    - [Install](#install)
+    - [Usage ](#usage-)
+    - [Run tests](#run-tests)
+    - [Deployment](#deployment)
+  - [👥 Author ](#-author-)
+  - [🔭 Future Features ](#-future-features-)
+  - [🤝 Contributing ](#-contributing-)
+  - [⭐️ Show your support ](#️-show-your-support-)
+  - [🙏 Acknowledgments ](#-acknowledgments-)
+  - [📝 License ](#-license-)
 
-## Available Scripts
+<!-- PROJECT DESCRIPTION -->
 
-In the project directory, you can run:
+# 📖 Rentals Frontend <a name="about-the-project"></a>
+**Rentals Frontend** is an implemention of a connection between Ruby on Rails back-end and Rentals Frontend. [Rentals Backend](https://github.com/myaserkhan/Rentals-Backend) handles the backend API, and [Rentals Frontend](https://github.com/myaserkhan/Rentals-Frontend) an web app to book an appointment to try a fancy car, to resrve a car.
 
-### `npm start`
+## 🛠 Built With <a name="built-with"></a>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Tech Stack <a name="tech-stack"></a>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<details>
+  <summary>Client</summary>
+  <ul> 
+    <li><a href="https://github.com/microverseinc/linters-config/tree/master/ror">Linters</a></li>
+    <li><a href="https://reactjs.org/">React</a></li>
+    <li><a href="https://redux.js.org/">Redux</a></li>
+  </ul>
+</details>
+<details>
+  <summary>Server</summary>
+  <ul>
+    <li><a href="https://rubyonrails.org/">ROR</a></li>
+  </ul>
+</details>
 
-### `npm test`
+<!-- Features -->
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Key Features <a name="key-features"></a>
 
-### `npm run build`
+- Web app to book an appointment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🚀 Live Demo <a name="live-demo"></a>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- N/A
 
-### `npm run eject`
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<!-- GETTING STARTED -->
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 💻 Getting Started <a name="getting-started"></a>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To get a local copy up and running, follow these steps.
+### Prerequisites
 
-## Learn More
+In order to run this project you need:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [API](https://github.com/myaserkhan/Rentals-Frontend)
+- [git](https://git-scm.com/)
+- [node.js](https://nodejs.org/en/)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Setup
 
-### Code Splitting
+Clone this repository to your desired folder:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+  git clone git@github.com:myaserkhan/Rentals-Frontend.git
+  cd Rentals-Frontend 
+```
 
-### Analyzing the Bundle Size
+### Install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Install thr project dependencies with:
 
-### Making a Progressive Web App
+```
+  npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Usage <a name="usage"></a>
 
-### Advanced Configuration
+To run the project, execute the following command:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+  npm start
+```
+
+### Run tests
+
+To run the test, execute the following command:
+
+```
+  npm test
+```
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+You can deploy this project using:
 
-### `npm run build` fails to minify
+```
+  npm run deploy
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- AUTHORS -->
+## 👥 Author <a name="authors"></a>
+ 
+👤 **Yasir Khan**
+- GitHub: [@myaserkhan](https://github.com/myaserkhan)
+- Twitter: [@khanyaser007](https://twitter.com/khanyaser007)
+- LinkedIn: [Yasir-Khan](https://www.linkedin.com/in/myaserkhan/)
+
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- FUTURE FEATURES -->
+
+## 🔭 Future Features <a name="future-features"></a>
+
+- Add more interactive features.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+
+## 🤝 Contributing <a name="contributing"></a>
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/KanzaTahreem/Hello-React-Frontend/issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- SUPPORT -->
+
+## ⭐️ Show your support <a name="support"></a>
+
+If you like this project and want to support me make cooler projects Give this project a Star.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGEMENTS -->
+
+## 🙏 Acknowledgments <a name="acknowledgements"></a>
+
+Original design idea by [Murat Korkmaz](https://www.behance.net/muratk)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<!-- LICENSE -->
+
+## 📝 License <a name="license"></a>
+
+This project is [MIT](./LICENSE) licensed.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
