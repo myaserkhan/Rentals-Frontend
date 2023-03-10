@@ -127,6 +127,10 @@ You can deploy this project using:
 - Twitter: [@khanyaser007](https://twitter.com/khanyaser007)
 - LinkedIn: [Yasir-Khan](https://www.linkedin.com/in/myaserkhan/)
 
+👤 **John Mutisya**
+- GitHub: [@johnmutisya](https://github.com/johnkioko)
+- Twitter: [@john_Web_Dev](https://twitter.com/John_Web_Dev)
+- LinkedIn: [johnmutisya]](https://www.linkedin.com/in/johnmutisya/)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
