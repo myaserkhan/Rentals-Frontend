@@ -16,8 +16,8 @@ const Container = styled.div`
     background-position: center;
     padding: 20px;
     ${mobile({
-  minHeight: '100vh',
-})};
+    minHeight: '100vh',
+  })};
 `;
 
 const ImageContainer = styled.div`
@@ -37,11 +37,11 @@ const ImageContainer = styled.div`
     background-position: center;
 
     ${mobile({
-  width: '80%',
-  height: '80%',
-  transform: 'translate(-10px, 30px)',
-  backgroundImage: 'url("https://i.ibb.co/hBLvjmq/lifestyle-mobile.png")',
-})};
+    width: '80%',
+    height: '80%',
+    transform: 'translate(-10px, 30px)',
+    backgroundImage: 'url("https://i.ibb.co/hBLvjmq/lifestyle-mobile.png")',
+  })};
 `;
 
 const LifeStyle = () => (
