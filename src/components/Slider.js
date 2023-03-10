@@ -7,14 +7,17 @@ import data from '../redux/cars/helpers/data';
 
 const Container = styled.div`
     display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    max-width: 100%;
     height: 60%;
+    width: 100%;
     overflow-x: hidden;
 `;
 
 const Arrow = styled.div`
     position: absolute;
+    pointer-events: ${(props) => (((props.slideIndex === 0 && props.direction === 'left') || ((props.slideIndex === data.length - 3) && props.direction === 'right')) && 'none')};
     width: 80px;
     height: 50px;
     border-top-${(props) => (props.direction === 'left' ? 'right' : 'left')}-radius: 180px;
@@ -41,47 +44,32 @@ const Arrow = styled.div`
 
 const Wrapper = styled.div`
     display: flex;
-    transition: all 1.5s ease-in-out;
-    transform: translateX(${(props) => props.slideIndex * -100}vw);
-`;
-
-const Slide = styled.div`
-    display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100%;
-    padding-right: 6%;
+    width: 100%;
+    transition: all 1.5s ease-in-out;
 `;
 
 const Slider = () => {
   const [slideIndex, setSlideIndex] = useState(0);
 
-  const handleNext = (direction) => {
-    if (direction === 'left') {
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+  const handleNext = () => {
+    if (slideIndex === data.length - 3) {
+      setSlideIndex(0);
     } else {
-      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+      setSlideIndex(slideIndex + 1);
     }
   };
-
   return (
     <Container>
-      <Arrow direction="left" onClick={() => handleNext('left')}>
+      <Arrow direction="left" onClick={() => handleNext()} slideIndex={slideIndex}>
         <ArrowLeftOutlined style={{ fontSize: '3rem', color: '#e6e6e6' }} />
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
-        <Slide>
-          {data.filter((car) => car.id % 2 !== 0).map((item) => (
-            <CarCard key={item.id} item={item} />))}
-        </Slide>
-        <Slide>
-          {data.filter((car) => car.id % 2 === 0).map((item) => (
-            <CarCard key={item.id} item={item} />))}
-        </Slide>
-        <Slide bgColor="green" />
+        {data.slice(slideIndex, slideIndex + 3).map((item) => (
+          <CarCard key={item.id} item={item} />))}
       </Wrapper>
-      <Arrow direction="right" onClick={() => handleNext('right')}>
+      <Arrow direction="right" onClick={() => handleNext()} slideIndex={slideIndex}>
         <ArrowRightOutlined style={{ fontSize: '3rem', color: '#e6e6e6' }} />
       </Arrow>
     </Container>
