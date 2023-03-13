@@ -24,6 +24,7 @@
     "redux-toolkit": "^1.1.2",
     "styled-components": "^5.3.8",
     "util": "^0.12.5",
+    "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
