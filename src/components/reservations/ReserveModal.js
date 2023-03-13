@@ -115,7 +115,6 @@ const BootstrapDialogTitle = (props) => {
   );
 };
 
-
 BootstrapDialogTitle.propTypes = {
   children: PropTypes.node.isRequired,
   onClose: PropTypes.func.isRequired,
