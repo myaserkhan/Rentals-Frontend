@@ -1,10 +1,13 @@
 /* eslint-disable camelcase */
+
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import {
-  ArrowBackIos, CachedOutlined, ChevronRightOutlined, HowToRegOutlined,
-} from '@material-ui/icons';
+import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+// import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
+import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
+import ReserveModal from '../reservations/ReserveModal';
 
 const CarImg = styled.img.attrs((props) => ({
   src: props.src,
@@ -29,22 +32,6 @@ const ReturnButton = styled.a.attrs((props) => ({
   color: white;
   &:hover {
     color: white;
-  } 
-`;
-
-const ReserveButton = styled.a.attrs((props) => ({
-  href: props.href,
-}))`
-  padding: 0.5rem;
-  border-radius: 20px;
-  width: 150px;
-  background-color: #97BF11;
-  text-decoration: none;
-  text-align: center !important;
-  color: white !important;
-  &:hover {
-    color: white !important;
-    cursor: pointer;
   } 
 `;
 
@@ -148,13 +135,13 @@ const CarDetails = () => {
     <div className="container" style={{ margin: 0 }}>
       <div className="row">
         <div className="d-flex flex-column align-items-center col-12 col-md-8" style={{ padding: 0 }}>
-          <CarImg src={car.image_url} />
+          <CarImg src={car.imageUrl} />
           <div className="d-flex p-relative align-items-end w-100">
             <ReturnButton href="/">
-              <ArrowBackIos />
+              <ArrowBackIosIcon />
             </ReturnButton>
             <div className="mx-auto text-center">
-              <CachedOutlined sx={{ fontSize: '40px', marginBottom: '0.5rem' }} />
+              <ChangeCircleOutlinedIcon sx={{ fontSize: '40px', marginBottom: '0.5rem' }} />
               <h2 style={{ fontSize: '14px', margin: '0' }}>
                 Rotate
               </h2>
@@ -168,8 +155,8 @@ const CarDetails = () => {
         <div className="d-flex flex-column justify-content-center align-items-end col-12 col-md-4" style={{ maxHeight: '90%', padding: '0 2.3rem' }}>
           <div className="text-end">
             <CarTitle>
-              { car.name.charAt(0).toUpperCase()
-              + car.name.slice(1) }
+              {car.name.charAt(0).toUpperCase()
+                + car.name.slice(1)}
             </CarTitle>
             <SubTitle>
               Rent this car for a week and receive 1 extra day!
@@ -219,15 +206,11 @@ const CarDetails = () => {
             <DiscoverMore>
               DISCOVER MORE MODELS
               {' '}
-              <ChevronRightOutlined />
+              <ChevronRightOutlinedIcon />
             </DiscoverMore>
           </div>
           <ColorWheel />
-          <ReserveButton>
-            <HowToRegOutlined />
-            {'   '}
-            Reserve
-          </ReserveButton>
+          <ReserveModal />
         </div>
       </div>
     </div>
