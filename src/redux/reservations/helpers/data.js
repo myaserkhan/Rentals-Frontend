@@ -3,14 +3,17 @@ const data = {
     {
       start_date: '10012016',
       end_date: '22012016',
+      city: 'New York',
     },
     {
       start_date: '10032016',
       end_date: '22032016',
+      city: 'Tangier',
     },
     {
       start_date: '10022016',
       end_date: '22022016',
+      city: 'Paris',
     },
   ],
   cities: [
@@ -23,7 +26,7 @@ const data = {
       id: 2,
     },
     {
-      name: 'new society',
+      name: 'New society',
       id: 99,
     },
   ],
