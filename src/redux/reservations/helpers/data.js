@@ -16,12 +16,15 @@ const data = {
   cities: [
     {
       name: 'Tangier',
+      id: 1,
     },
     {
       name: 'Belo Horizonte',
+      id: 2,
     },
     {
-      name: 'f society',
+      name: 'new society',
+      id: 99,
     },
   ],
 };
