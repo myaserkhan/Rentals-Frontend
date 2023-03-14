@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-// import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import ReserveModal from '../reservations/ReserveModal';
 
@@ -155,8 +154,8 @@ const CarDetails = () => {
         <div className="d-flex flex-column justify-content-center align-items-end col-12 col-md-4" style={{ maxHeight: '90%', padding: '0 2.3rem' }}>
           <div className="text-end">
             <CarTitle>
-              {car.name.charAt(0).toUpperCase()
-                + car.name.slice(1)}
+              { car.name.charAt(0).toUpperCase()
+              + car.name.slice(1) }
             </CarTitle>
             <SubTitle>
               Rent this car for a week and receive 1 extra day!
