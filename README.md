@@ -121,16 +121,37 @@ You can deploy this project using:
 
 <!-- AUTHORS -->
 ## 👥 Author <a name="authors"></a>
- 
+
+## Author 1
+
+👤 **Sajeel Zafar**
+
+- GitHub: [@Sajeelzafar](https://github.com/Sajeelzafar)
+- Twitter: [@SajeelZafar6](https://twitter.com/SajeelZafar6)
+- LinkedIn: [Sajeel Zafar](https://www.linkedin.com/in/sajeelzafar/)
+ ## Author 2
+
 👤 **Yasir Khan**
+
 - GitHub: [@myaserkhan](https://github.com/myaserkhan)
 - Twitter: [@khanyaser007](https://twitter.com/khanyaser007)
 - LinkedIn: [Yasir-Khan](https://www.linkedin.com/in/myaserkhan/)
 
+## Author 3
+
 👤 **John Mutisya**
+
 - GitHub: [@johnmutisya](https://github.com/johnkioko)
 - Twitter: [@john_Web_Dev](https://twitter.com/John_Web_Dev)
-- LinkedIn: [johnmutisya]](https://www.linkedin.com/in/johnmutisya/)
+- LinkedIn: [johnmutisya](https://www.linkedin.com/in/johnmutisya/)
+
+## Author 4
+
+👤 **Daphine Atim**
+
+- GitHub: [@Daphineatim](https://github.com/Daphineatim)
+- Twitter: [@dhaphyn](https://twitter.com/dhaphyn)
+- LinkedIn [DaphineAtim](https://www.linkedin.com/in/daphine-atim-27861422a/)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
