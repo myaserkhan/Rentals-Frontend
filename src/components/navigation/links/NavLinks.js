@@ -11,7 +11,6 @@ const paths = [
   '/cars/new',
   '/myreservations',
   '/lifestyle',
-  '/dashboard',
   '/logout',
 ];
 
@@ -20,7 +19,6 @@ const linksText = [
   'Announce a Car',
   'My Reservations',
   'Lifestyle',
-  ['Dashboard', 'Cars', 'Reservations'],
   'Log out',
 ];
 
@@ -55,7 +53,7 @@ const NavLinks = () => {
   return (
     <Container>
       <Nav className="sidebar-content">
-        { linksText.map((text, index) => {
+        {linksText.map((text, index) => {
           let nestedLinks = [];
           let propText = text;
           if (typeof text === 'object') {
