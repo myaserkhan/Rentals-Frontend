@@ -1,16 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-import data from './helpers/data';
-
 const RESERVATIONS_API_ENDPOINT = 'http://127.0.0.1:4000/api/v1/reservations';
 const CITIES_API_ENDPOINT = 'http://127.0.0.1:4000/cities';
 
 const initialState = {
   isFetching: false,
   data: [],
-  cities: [...data.cities],
+  cities: [],
   error: {},
+  utils: {
+    openModal: false,
+  },
 };
 
 const jsonTypeConfig = {

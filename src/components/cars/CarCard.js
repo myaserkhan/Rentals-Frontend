@@ -123,7 +123,7 @@ const handleSlideIndex = (slideIndex, dispatch, action) => {
 const CarCard = (props) => {
   const { item } = props;
   const {
-    imgUrl, name, brand, id,
+    imgurl, name, brand, id,
   } = item;
   const { color } = item.description;
   const dispatch = useDispatch();
@@ -148,7 +148,7 @@ const CarCard = (props) => {
       style={{ maxWidth: '300px' }}
     >
       <Circle bgColor={color} />
-      <Image src={imgUrl} />
+      <Image src={imgurl} />
       <Info>
         <NavLink to={`/cars/${id}/details`}>
           <Icon bg="e9f5f5">
