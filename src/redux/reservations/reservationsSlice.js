@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const RESERVATIONS_API_ENDPOINT = 'http://127.0.0.1:4000/api/v1/reservations';
-const CITIES_API_ENDPOINT = 'http://127.0.0.1:4000/cities';
+const RESERVATIONS_API_ENDPOINT = 'http://127.0.0.1:3000/api/v1/users/1/reservations';
 
 const initialState = {
   isFetching: false,
@@ -25,18 +24,6 @@ export const getReservations = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const res = await axios.get(RESERVATIONS_API_ENDPOINT);
-      return res.data;
-    } catch (error) {
-      return rejectWithValue({ ...error.response.data });
-    }
-  },
-);
-
-export const getCities = createAsyncThunk(
-  'redux/cars/getCities.js',
-  async (payload, { rejectWithValue }) => {
-    try {
-      const res = await axios.get(CITIES_API_ENDPOINT);
       return res.data;
     } catch (error) {
       return rejectWithValue({ ...error.response.data });

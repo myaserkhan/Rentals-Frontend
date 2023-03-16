@@ -18,7 +18,6 @@ const MyReservations = () => {
   const reservations = useSelector((state) => state.reservations.data);
 
   useEffect(() => {
-    console.log(reservations);
   }, [reservations]);
 
   return (

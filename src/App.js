@@ -7,7 +7,8 @@ import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCars } from './redux/cars/carsSlice';
-import { getCities, getReservations } from './redux/reservations/reservationsSlice';
+import { getReservations } from './redux/reservations/reservationsSlice';
+import { getCities } from './redux/cities/citiesSlice';
 // import Announcement from './components/Announcement';
 import Sidebar from './components/navigation/Sidebar';
 import Announcement from './components/Announcement';
@@ -38,7 +39,7 @@ const App = () => {
   useEffect(() => {
     dispatch(getCars());
     dispatch(getReservations());
-    dispatch(getCities());
+    dispatch(getCities({ country: 'Pakistan' }));
   }, [dispatch]);
 
   // eslint-disable-next-line implicit-arrow-linebreak
