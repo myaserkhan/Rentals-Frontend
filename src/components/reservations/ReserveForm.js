@@ -83,7 +83,7 @@ const SelectCityOption = styled.option``;
 const ReserveForm = () => {
   const minDate = new Date().toISOString().split('T')[0];
   const maxDate = new Date();
-  const { cities } = useSelector((state) => state.reservations);
+  const cities = useSelector((state) => state.cities.cities[0].data);
 
   return (
     <>
@@ -121,8 +121,8 @@ const ReserveForm = () => {
                 Select City
               </SelectCityOption>
               {cities.map((city) => (
-                <SelectCityOption key={uuidv4()} value={city.id}>
-                  {city.name}
+                <SelectCityOption key={uuidv4()} value="Lahore">
+                  {city}
                 </SelectCityOption>
               ))}
             </SelectCity>
