@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const CAR_API_ENDPOINT = 'http://127.0.0.1:4000/api/v1/cars';
+const CAR_API_ENDPOINT = 'http://127.0.0.1:3000/api/v1/cars';
 
 const initialState = {
   isFetching: false,
@@ -82,43 +82,44 @@ export const removeCar = createAsyncThunk(
   },
 );
 
-const carsSlicer = createSlice({
+const carsSlice = createSlice({
   name: 'cars',
   initialState,
-  reducers: {
-  },
-  extraReducers: {
-    [getCars.pending.type]: (state) => ({ ...state, isFetching: true, error: {} }),
-    [getCars.fulfilled.type]: (state, action) => (
-      {
-        ...state, isFetching: false, data: action.payload, error: {},
-      }),
-    [getCars.rejected.type]: (state, action) => (
-      { ...state, isFetching: false, error: action.payload }
-    ),
-    [addCar.pending.type]: (state) => (
-      { ...state, isFetching: true, error: {} }
-    ),
-    [addCar.fulfilled.type]: (state, action) => (
-      { ...state, isFetching: false, data: [...state.data, action.payload] }
-    ),
-    [addCar.rejected.type]: (state, action) => (
-      { ...state, isFetching: false, error: { ...action.payload } }
-    ),
-    [removeCar.pending.type]: (state) => (
-      { ...state, isFetching: true, error: {} }
-    ),
-    [removeCar.fulfilled.type]: (state, action) => (
-      {
-        ...state,
-        isFetching: false,
-        data: filterDeleted(state.data, action.payload.id),
-      }
-    ),
-    [removeCar.rejected.type]: (state, action) => (
-      { ...state, isFetching: false, error: { ...action.payload } }
-    ),
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getCars.pending, (state) => {
+        return { ...state, isFetching: true, error: {} };
+      })
+      .addCase(getCars.fulfilled, (state, action) => {
+        return { ...state, isFetching: false, data: action.payload, error: {} };
+      })
+      .addCase(getCars.rejected, (state, action) => {
+        return { ...state, isFetching: false, error: action.payload };
+      })
+      .addCase(addCar.pending, (state) => {
+        return { ...state, isFetching: true, error: {} };
+      })
+      .addCase(addCar.fulfilled, (state, action) => {
+        return { ...state, isFetching: false, data: [...state.data, action.payload] };
+      })
+      .addCase(addCar.rejected, (state, action) => {
+        return { ...state, isFetching: false, error: action.payload };
+      })
+      .addCase(removeCar.pending, (state) => {
+        return { ...state, isFetching: true, error: {} };
+      })
+      .addCase(removeCar.fulfilled, (state, action) => {
+        return {
+          ...state,
+          isFetching: false,
+          data: filterDeleted(state.data, action.payload.id),
+        };
+      })
+      .addCase(removeCar.rejected, (state, action) => {
+        return { ...state, isFetching: false, error: action.payload };
+      });
   },
 });
 
-export default carsSlicer.reducer;
+export default carsSlice.reducer;

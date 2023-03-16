@@ -19,7 +19,7 @@ const MyReservations = () => {
 
   useEffect(() => {
     console.log(reservations);
-  }, []);
+  }, [reservations]);
 
   return (
     <GridContainer

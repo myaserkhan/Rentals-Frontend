@@ -4,7 +4,9 @@ import {
   Route,
 } from 'react-router-dom';
 import styled from 'styled-components';
-// import { getCars } from './redux/cars/carsSlice';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getCars } from './redux/cars/carsSlice';
 // import { getCities, getReservations } from './redux/reservations/reservationsSlice';
 // import Announcement from './components/Announcement';
 import Sidebar from './components/navigation/Sidebar';
@@ -30,14 +32,17 @@ const AppContainer = styled.div`
   position: relative;
 `;
 
-const App = () =>
-// useEffect(() => {
-//   store.dispatch(getCars());
-//   store.dispatch(getCities());
-//   store.dispatch(getReservations());
-// }, []);
-// eslint-disable-next-line implicit-arrow-linebreak
-  (
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCars());
+    // dispatch(getReservations());
+    // dispatch(getCities());
+  }, [dispatch]);
+
+  // eslint-disable-next-line implicit-arrow-linebreak
+  return (
     <Router>
       <AppContainer>
         <Announcement />
@@ -55,5 +60,5 @@ const App = () =>
       </AppContainer>
     </Router>
   );
-
+};
 export default App;
