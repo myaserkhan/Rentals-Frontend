@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -88,37 +89,21 @@ const carsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getCars.pending, (state) => {
-        return { ...state, isFetching: true, error: {} };
-      })
-      .addCase(getCars.fulfilled, (state, action) => {
-        return { ...state, isFetching: false, data: action.payload, error: {} };
-      })
-      .addCase(getCars.rejected, (state, action) => {
-        return { ...state, isFetching: false, error: action.payload };
-      })
-      .addCase(addCar.pending, (state) => {
-        return { ...state, isFetching: true, error: {} };
-      })
-      .addCase(addCar.fulfilled, (state, action) => {
-        return { ...state, isFetching: false, data: [...state.data, action.payload] };
-      })
-      .addCase(addCar.rejected, (state, action) => {
-        return { ...state, isFetching: false, error: action.payload };
-      })
-      .addCase(removeCar.pending, (state) => {
-        return { ...state, isFetching: true, error: {} };
-      })
-      .addCase(removeCar.fulfilled, (state, action) => {
-        return {
-          ...state,
-          isFetching: false,
-          data: filterDeleted(state.data, action.payload.id),
-        };
-      })
-      .addCase(removeCar.rejected, (state, action) => {
-        return { ...state, isFetching: false, error: action.payload };
-      });
+      .addCase(getCars.pending, (state) => ({ ...state, isFetching: true, error: {} }))
+      .addCase(getCars.fulfilled, (state, action) => ({
+        ...state, isFetching: false, data: action.payload, error: {},
+      }))
+      .addCase(getCars.rejected, (state, action) => ({ ...state, isFetching: false, error: action.payload }))
+      .addCase(addCar.pending, (state) => ({ ...state, isFetching: true, error: {} }))
+      .addCase(addCar.fulfilled, (state, action) => ({ ...state, isFetching: false, data: [...state.data, action.payload] }))
+      .addCase(addCar.rejected, (state, action) => ({ ...state, isFetching: false, error: action.payload }))
+      .addCase(removeCar.pending, (state) => ({ ...state, isFetching: true, error: {} }))
+      .addCase(removeCar.fulfilled, (state, action) => ({
+        ...state,
+        isFetching: false,
+        data: filterDeleted(state.data, action.payload.id),
+      }))
+      .addCase(removeCar.rejected, (state, action) => ({ ...state, isFetching: false, error: action.payload }));
   },
 });
 
