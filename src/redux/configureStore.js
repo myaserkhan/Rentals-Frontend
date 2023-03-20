@@ -5,12 +5,14 @@ import carsReducer from './cars/carsSlice';
 import reservationsReducer from './reservations/reservationsSlice';
 import utilReducer from './utils/utilsReducer';
 import citiesReducer from './cities/citiesSlice';
+import authReducer from './auth/authSlice';
 
 const reducer = combineReducers({
   cars: carsReducer,
   reservations: reservationsReducer,
   utils: utilReducer,
   cities: citiesReducer,
+  auth: authReducer,
   // additional reducers could be added here
 });
 
