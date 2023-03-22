@@ -1,7 +1,11 @@
+/* eslint-disable camelcase */
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
 import { mobile } from '../../responsive';
+import { addReservation } from '../../redux/reservations/reservationsSlice';
 
 const Form = styled.form`
   padding: 0.5rem;
@@ -78,26 +82,73 @@ const SelectCity = styled.select`
     font-size: 16px;
 `;
 
+const SubmitButton = styled.button.attrs((props) => ({
+  type: props.type,
+}))`
+  margin: 1rem 0 0.5rem 0;
+  align-self: center;
+  padding: 0.5rem;
+  border-radius: 20px;
+  width: 150px;
+  background-color: #f6a40e;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  transition: all 0.5s ease-in-out;
+  &:hover {
+    color: black;
+    background-color: #ffefd5;
+    border: 1px solid #f6a40e;
+  }
+`;
+
 const SelectCityOption = styled.option``;
 
 const ReserveForm = () => {
-  const minDate = new Date().toISOString().split('T')[0];
-  const maxDate = new Date();
-  const cities = useSelector((state) => state.cities.cities[0].data);
+  const [minDate, setMinDate] = useState(new Date().toISOString().split('T')[0]);
+  const [maxDate, setMaxDate] = useState(new Date());
+  const startDate = new Date().toISOString().split('T')[0];
+
+  const dispatch = useDispatch();
+  const redirect = useNavigate();
+  const { car_id } = useParams();
+
+  const { cities } = useSelector((state) => state.reservations);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const select = document.querySelector('select').value;
+    const start_date = document.querySelector('#start').value;
+    const end_date = document.querySelector('#end').value;
+    const data = {
+      start_date,
+      end_date,
+      city_id: select,
+      car_id,
+    };
+    dispatch(addReservation(data));
+    redirect('/myreservations');
+  };
 
   return (
     <>
-      <Form>
+      <Form onSubmit={(e) => handleSubmit(e)}>
         <Wrapper>
           <DateContainer>
             <Label htmlFor="start">Start Date :</Label>
             <Input
               type="date"
               id="start"
-              name="reserve-start"
-              defaultValue={minDate}
-              min={minDate}
+              name="start_date"
+              defaultValue={startDate}
+              min={startDate}
               max={maxDate}
+              onChange={(e) => {
+                const parseDate = new Date(e.target.value);
+                parseDate.setDate(parseDate.getDate() + 1);
+                const date = parseDate.toISOString().split('T')[0];
+                setMinDate(date);
+              }}
               required
             />
           </DateContainer>
@@ -106,28 +157,37 @@ const ReserveForm = () => {
             <Input
               type="date"
               id="end"
-              name="reserve-end"
+              name="end_date"
               defaultValue={minDate}
               min={minDate}
-              max={maxDate}
+              onChange={(e) => {
+                const parseDate = new Date(e.target.value);
+                parseDate.setDate(parseDate.getDate() - 1);
+                const date = parseDate.toISOString().split('T')[0];
+                setMaxDate(date);
+              }}
+              required
             />
           </DateContainer>
         </Wrapper>
         <Wrapper>
           <Filter>
             <FilterTitle>City</FilterTitle>
-            <SelectCity className="form-select">
-              <SelectCityOption selected disabled>
-                Select City
-              </SelectCityOption>
+            <SelectCity className="form-select" name="city_id" defaultValue={1}>
               {cities.map((city) => (
-                <SelectCityOption key={uuidv4()} value="Lahore">
-                  {city}
+                <SelectCityOption
+                  key={uuidv4()}
+                  value={city.id}
+                >
+                  {city.name}
                 </SelectCityOption>
               ))}
             </SelectCity>
           </Filter>
         </Wrapper>
+        <SubmitButton type="submit">
+          Reserve
+        </SubmitButton>
       </Form>
     </>
   );

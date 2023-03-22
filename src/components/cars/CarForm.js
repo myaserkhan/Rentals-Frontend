@@ -105,7 +105,7 @@ const CarForm = () => {
           </InputLabel>
           <Input type="text" name="name" placeholder="Model" id="car-model" />
           <Input type="text" name="brand" placeholder="Brand" id="car-brand" />
-          <Input type="text" name="imgUrl" placeholder="Image Url" id="car-image" />
+          <Input type="text" name="imgurl" placeholder="Image Url" id="car-image" />
         </InputWrapper>
       </FormRow>
       <FormRow>
