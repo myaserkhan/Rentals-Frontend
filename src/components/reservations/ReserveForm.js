@@ -113,7 +113,7 @@ const ReserveForm = () => {
   const redirect = useNavigate();
   const { car_id } = useParams();
 
-  const cities = useSelector((state) => state.cities.cities[0].data);
+  const { cities } = useSelector((state) => state.reservations);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -177,9 +177,9 @@ const ReserveForm = () => {
               {cities.map((city) => (
                 <SelectCityOption
                   key={uuidv4()}
-                  value="Lahore"
+                  value={city.id}
                 >
-                  {city}
+                  {city.name}
                 </SelectCityOption>
               ))}
             </SelectCity>

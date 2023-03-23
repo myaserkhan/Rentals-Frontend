@@ -9,7 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {
   Star, LocalGasStation, WbAuto, AcUnit, PriceCheck, EventSeat,
 } from '@mui/icons-material';
@@ -115,10 +115,10 @@ const ReservationCard = ({ reservationDetail }) => {
   const {
     car, id,
   } = reservationDetail;
+  const { imgUrl } = car;
   const carName = car.name;
-  const image = car.imgurl;
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth.user.payload);
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <CardContainer
@@ -147,7 +147,7 @@ const ReservationCard = ({ reservationDetail }) => {
       <CardImage
         component="img"
         alt="green iguana"
-        image={image}
+        image={imgUrl}
       />
       <CardContent>
         {/* <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -212,3 +212,11 @@ const ReservationCard = ({ reservationDetail }) => {
 };
 
 export default ReservationCard;
+
+ReservationCard.propTypes = {
+  reservationDetail: PropTypes.shape({
+    start_date: PropTypes.string.isRequired,
+    end_date: PropTypes.string.isRequired,
+    city_id: PropTypes.string.isRequired,
+  }).isRequired,
+};
