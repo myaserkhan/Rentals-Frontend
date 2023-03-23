@@ -17,8 +17,8 @@ const FormRow = styled.div`
   width: 100%;
   margin-bottom: 1.5rem;
   ${mobile({
-    'flex-direction': 'column',
-  })};
+  'flex-direction': 'column',
+})};
 `;
 
 const InputWrapper = styled.div`
@@ -105,7 +105,7 @@ const CarForm = () => {
           </InputLabel>
           <Input type="text" name="name" placeholder="Model" id="car-model" />
           <Input type="text" name="brand" placeholder="Brand" id="car-brand" />
-          <Input type="text" name="imgurl" placeholder="Image Url" id="car-image" />
+          <Input type="text" name="imgUrl" placeholder="Image Url" id="car-image" />
         </InputWrapper>
       </FormRow>
       <FormRow>
