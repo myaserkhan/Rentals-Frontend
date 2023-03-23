@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -10,11 +9,23 @@ const initialState = {
   error: {},
 };
 
-const jsonTypeConfig = () => ({
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+// eslint-disable-next-line no-unused-vars
+const jsonTypeConfig = (token) => {
+  if (token) {
+    return {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+  }
+
+  return {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+};
 
 const bodyOptions = (formElem) => {
   const data = new FormData(formElem);
@@ -23,8 +34,10 @@ const bodyOptions = (formElem) => {
   const descEntries = entries.slice(3);
 
   const body = {
-    car: {},
-    description: {},
+    car: {
+    },
+    description: {
+    },
   };
 
   carEntries.forEach((pair) => {
@@ -46,7 +59,8 @@ export const getCars = createAsyncThunk(
   'redux/cars/getCars.js',
   async (payload, { rejectWithValue }) => {
     try {
-      const response = await axios.get(CAR_API_ENDPOINT, jsonTypeConfig());
+      const response = await axios
+        .get(CAR_API_ENDPOINT, jsonTypeConfig(false));
       return response.data;
     } catch (err) {
       return rejectWithValue({ ...err.response.data });
@@ -57,11 +71,14 @@ export const getCars = createAsyncThunk(
 export const addCar = createAsyncThunk(
   'redux/cars/addCar.js',
   async (payload, { rejectWithValue }) => {
+    const rcarsJwt = JSON.parse(localStorage.getItem('rcars_jwt'));
+    const token = (rcarsJwt) ? rcarsJwt.token : null;
     const data = bodyOptions(payload);
-    const config = jsonTypeConfig();
+    const config = jsonTypeConfig(token);
 
     try {
-      const response = await axios.post(CAR_API_ENDPOINT, data, config);
+      const response = await axios
+        .post(CAR_API_ENDPOINT, data, config);
       return response.data;
     } catch (error) {
       return rejectWithValue({ ...error.response.data });
@@ -72,10 +89,13 @@ export const addCar = createAsyncThunk(
 export const removeCar = createAsyncThunk(
   'redux/cars/removeCar.js',
   async (payload, { rejectWithValue }) => {
-    const config = jsonTypeConfig();
+    const rcarsJwt = JSON.parse(localStorage.getItem('rcars_jwt'));
+    const token = (rcarsJwt) ? rcarsJwt.token : null;
+    const config = jsonTypeConfig(token);
 
     try {
-      const response = await axios.delete(`${CAR_API_ENDPOINT}/${payload}`, config);
+      const response = await axios
+        .delete(`${CAR_API_ENDPOINT}/${payload}`, config);
       return response.data;
     } catch (error) {
       return rejectWithValue({ ...error.response.data });
@@ -83,28 +103,43 @@ export const removeCar = createAsyncThunk(
   },
 );
 
-const carsSlice = createSlice({
+const carsSlicer = createSlice({
   name: 'cars',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(getCars.pending, (state) => ({ ...state, isFetching: true, error: {} }))
-      .addCase(getCars.fulfilled, (state, action) => ({
+  reducers: {
+  },
+  extraReducers: {
+    [getCars.pending.type]: (state) => ({ ...state, isFetching: true, error: {} }),
+    [getCars.fulfilled.type]: (state, action) => (
+      {
         ...state, isFetching: false, data: action.payload, error: {},
-      }))
-      .addCase(getCars.rejected, (state, action) => ({ ...state, isFetching: false, error: action.payload }))
-      .addCase(addCar.pending, (state) => ({ ...state, isFetching: true, error: {} }))
-      .addCase(addCar.fulfilled, (state, action) => ({ ...state, isFetching: false, data: [...state.data, action.payload] }))
-      .addCase(addCar.rejected, (state, action) => ({ ...state, isFetching: false, error: action.payload }))
-      .addCase(removeCar.pending, (state) => ({ ...state, isFetching: true, error: {} }))
-      .addCase(removeCar.fulfilled, (state, action) => ({
+      }),
+    [getCars.rejected.type]: (state, action) => (
+      { ...state, isFetching: false, error: action.payload }
+    ),
+    [addCar.pending.type]: (state) => (
+      { ...state, isFetching: true, error: {} }
+    ),
+    [addCar.fulfilled.type]: (state, action) => (
+      { ...state, isFetching: false, data: [...state.data, action.payload] }
+    ),
+    [addCar.rejected.type]: (state, action) => (
+      { ...state, isFetching: false, error: { ...action.payload } }
+    ),
+    [removeCar.pending.type]: (state) => (
+      { ...state, isFetching: true, error: {} }
+    ),
+    [removeCar.fulfilled.type]: (state, action) => (
+      {
         ...state,
         isFetching: false,
         data: filterDeleted(state.data, action.payload.id),
-      }))
-      .addCase(removeCar.rejected, (state, action) => ({ ...state, isFetching: false, error: action.payload }));
+      }
+    ),
+    [removeCar.rejected.type]: (state, action) => (
+      { ...state, isFetching: false, error: { ...action.payload } }
+    ),
   },
 });
 
-export default carsSlice.reducer;
+export default carsSlicer.reducer;
