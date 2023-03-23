@@ -13,7 +13,6 @@
     - [Setup](#setup)
     - [Install](#install)
     - [Usage ](#usage-)
-    - [Run tests](#run-tests)
     - [Deployment](#deployment)
   - [👥 Author ](#-author-)
   - [🔭 Future Features ](#-future-features-)
@@ -104,14 +103,6 @@ To run the project, execute the following command:
 
 ```
   npm start
-```
-
-### Run tests
-
-To run the test, execute the following command:
-
-```
-  npm test
 ```
 
 ### Deployment
