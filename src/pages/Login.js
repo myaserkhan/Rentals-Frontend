@@ -99,7 +99,8 @@ const Login = () => {
       <Wrapper>
         <Title>SIGN IN</Title>
         <Form onSubmit={(event) => authenticate(event)}>
-          <Input type="text" name="username" placeholder="Username" defaultValue="" />
+          <Input type="email" name="email" placeholder="Email" defaultValue="" />
+          <Input type="password" name="password" placeholder="Password" defaultValue="" />
           <Button type="submit">LOG IN</Button>
           <Link to="/sign_up">SIGN UP</Link>
         </Form>

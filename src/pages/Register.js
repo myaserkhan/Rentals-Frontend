@@ -99,6 +99,7 @@ const Register = () => {
         <Form onSubmit={(e) => authenticate(e)}>
           <Input type="text" name="username" placeholder="Username" defaultValue="" />
           <Input type="email" name="email" placeholder="E-mail" defaultValue="" />
+          <Input type="password" name="password" placeholder="Password" defaultValue="" />
           <Aggrement>
             By clicking
             {' '}
