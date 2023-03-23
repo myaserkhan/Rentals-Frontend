@@ -1,26 +1,35 @@
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Logout } from '@mui/icons-material';
 import { useEffect } from 'react';
+import LinkActive from './LinkActive';
+import { logOutUser } from '../../../redux/auth/authSlice';
 import { setActiveLink } from '../../../redux/utils/actions/navActions';
 import store from '../../../redux/configureStore';
-import LinkActive from './LinkActive';
 
-const paths = [
-  '/',
-  '/cars/new',
-  '/myreservations',
-  '/lifestyle',
-  '/logout',
-];
+const loggedLinks = {
+  '/cars': 'Reserve a Car',
+  '/cars/new': 'Announce a Car',
+  '/myreservations': 'My Reservations',
+  '/lifestyle': 'LifeStyle',
+};
 
-const linksText = [
-  'Reserve a Car',
-  'Announce a Car',
-  'My Reservations',
-  'Lifestyle',
-  'Log out',
-];
+const unLoggedLinks = {
+  '/cars': 'Reserve a Car',
+  '/lifestyle': 'LifeStyle',
+  Login: <LinkActive path="/login" text="Log In" />,
+  Register: <LinkActive path="/sign_up" text="Register" />,
+};
+
+const loggedLinksKeys = Object.keys(loggedLinks);
+
+const unLoggedLinksKeys = Object.keys(unLoggedLinks);
+
+const loggedLinksMappable = Object.entries(loggedLinks);
+
+const unloggedLinksMappable = Object.entries(unLoggedLinks);
 
 const Container = styled.div`
   width: 100%;
@@ -36,41 +45,90 @@ const Nav = styled.div`
   margin: 0px;
 `;
 
-const activeLink = (payload) => {
-  store.dispatch(setActiveLink(payload));
+const LogOut = styled.div`
+  display: flex;
+  position: absolute;
+  bottom: 100px;
+  left: 20px;
+  justify-content: space-between;
+  width: 150px;
+  padding: 0.6rem 1rem;
+  background-color: #C70000;
+  color: white;
+  border-radius: 25px;
+  text-decoration: none;
+  &:hover {
+    color: #c70000;
+    background-color: white;
+    border: 1px solid #c70000;
+  }
+`;
+
+const handleActiveLink = (path) => {
+  store.dispatch(setActiveLink(path));
 };
 
 const NavLinks = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (paths.includes(location.pathname)) {
-      activeLink(location.pathname);
+    if (loggedLinksKeys.includes(location.pathname)
+      || unLoggedLinksKeys.includes(location.pathname)) {
+      handleActiveLink(location.pathname);
     } else {
-      activeLink('/');
+      handleActiveLink('/cars');
     }
   }, []);
+
   return (
     <Container>
       <Nav className="sidebar-content">
-        {linksText.map((text, index) => {
-          let nestedLinks = [];
-          let propText = text;
-          if (typeof text === 'object') {
-            nestedLinks = text.slice(1);
-            [propText] = text;
-          }
-
-          return (
-            <LinkActive
-              key={uuidv4()}
-              path={paths[index]}
-              nestedLinks={nestedLinks}
-              text={propText}
-            />
-          );
-        })}
+        {isAuthenticated
+          ? loggedLinksMappable.map((link) => {
+            let nestedLinks = [];
+            let propText = link[1];
+            if (typeof link[1] === 'object') {
+              nestedLinks = link[1].slice(1);
+              [propText] = link[1].slice(0, 1);
+            }
+            return (
+              <LinkActive
+                key={uuidv4()}
+                path={link[0]}
+                nestedLinks={nestedLinks}
+                text={propText}
+              />
+            );
+          })
+          : unloggedLinksMappable.map((link) => {
+            const nestedLinks = [];
+            const propText = link[1];
+            return (
+              <LinkActive
+                key={uuidv4()}
+                path={link[0]}
+                nestedLinks={nestedLinks}
+                text={propText}
+              />
+            );
+          })}
       </Nav>
+      {
+        isAuthenticated && (
+          <LogOut onClick={() => {
+            dispatch(logOutUser());
+            navigate('/login', { replace: true });
+            document.location.reload(true);
+          }}
+          >
+            Log out
+            <Logout />
+          </LogOut>
+        )
+      }
     </Container>
   );
 };
