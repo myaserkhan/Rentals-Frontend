@@ -19,9 +19,9 @@ const CityOption = () => {
 
   return (
     <Select>
-      { cities.map((city) => (
+      {cities.map((city) => (
         <option key={uuidv4()} value={city.id}>
-          { city.name }
+          {city.name}
         </option>
       ))}
     </Select>

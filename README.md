@@ -58,6 +58,12 @@
 
 - N/A
 
+#### You can login using the following credentials:
+```
+email : foo1@foo.com
+password: admin123
+```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 

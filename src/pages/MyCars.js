@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
-import ReservationCard from '../components/reservations/ReservationCard';
+import CarCard from '../components/cars/CarCard';
 
 const GridContainer = styled(Grid)`
   background-color: #f6f6f6;
@@ -13,8 +13,8 @@ const GridContainer = styled(Grid)`
   margin: 0 !important;
 `;
 
-const MyReservations = () => {
-  const reservations = useSelector((state) => state.reservations.data);
+const MyCars = () => {
+  const cars = useSelector((state) => state.cars.data);
 
   return (
     <GridContainer
@@ -24,13 +24,13 @@ const MyReservations = () => {
         xs: 1, sm: 8, md: 8, lg: 12,
       }}
     >
-      {reservations.map((reservationDetail) => (
+      {cars.map((item) => (
         <Grid item key={uuidv4()} xs={2} sm={4} md={4}>
-          <ReservationCard key={uuidv4()} reservationDetail={reservationDetail} />
+          <CarCard key={uuidv4()} item={item} />
         </Grid>
       ))}
     </GridContainer>
   );
 };
 
-export default MyReservations;
+export default MyCars;

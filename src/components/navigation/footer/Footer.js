@@ -55,7 +55,7 @@ const Footer = () => (
         </SocialIcon>
       </SocialContainer>
       <Signature>
-        2022 ©️ MIT license
+        2023 ©️ MIT license
       </Signature>
     </Container>
   </>

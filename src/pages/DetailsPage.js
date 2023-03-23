@@ -1,4 +1,4 @@
-import CarDetails from '../components/CarDetails';
+import CarDetails from '../components/cars/CarDetails';
 
 const DetailsPage = () => (
 

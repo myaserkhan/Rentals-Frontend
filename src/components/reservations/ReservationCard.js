@@ -1,6 +1,7 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 /* eslint-disable camelcase */
 import * as React from 'react';
+import { motion } from 'framer-motion';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -8,12 +9,14 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {
   Star, LocalGasStation, WbAuto, AcUnit, PriceCheck, EventSeat,
 } from '@mui/icons-material';
+import { useDispatch, useSelector } from 'react-redux';
 import { mobile } from '../../responsive';
 import ReservationDetail from './ReservationDetail';
+import { cancelReservation } from '../../redux/reservations/reservationsSlice';
 
 const CardContainer = styled(Card)`
    padding: 1rem;
@@ -25,12 +28,13 @@ const CardContainer = styled(Card)`
 const CardImage = styled(CardMedia).attrs((props) => ({
   image: props.image,
   component: 'img',
-  height: props.height,
 }))`
     background-size: cover;
+    height: 30%;
+    object-fit: cover;
 `;
 
-const TitleContainer = styled(Typography)`
+const TitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,7 +42,7 @@ const TitleContainer = styled(Typography)`
   border-bottom: 1px solid #ccc;
 `;
 
-const CardTitle = styled(Typography)`
+const CardTitle = styled.div`
   font-size: 1.5rem; 
   font-weight: bold;
   padding-bottom: 0.5rem;
@@ -59,7 +63,7 @@ const Icon = styled.div`
     color: #5688ae;
 `;
 
-const CarDetail = styled(Typography)`
+const CarDetail = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -95,6 +99,7 @@ const CancelButton = styled(Button)`
   border-radius: 10px !important;
   width: 100px !important;
   margin-left: 1rem !important;
+  font-size: 0.8rem !important;
   &:hover {
     color: #c70000 !important;
     background-color: white !important;
@@ -107,10 +112,30 @@ const ReservationCard = ({ reservationDetail }) => {
   // This linters complains about the use of
   // camelCase for the variables, but in our API we use snake_case for Ruby on rails convention.
 
-  const { start_date, city } = reservationDetail;
+  const {
+    car, id,
+  } = reservationDetail;
+  const carName = car.name;
+  const image = car.imgUrl;
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth.user.payload);
 
   return (
     <CardContainer
+      as={motion.div}
+      initial={{
+        opacity: 0,
+        translateY: 50,
+      }}
+      animate={{
+        opacity: 1,
+        translateX: 0,
+        translateY: 0,
+      }}
+      transition={{
+        duration: 0.2,
+        delay: 0.2,
+      }}
       sx={{
         width: {
           sx: 1.0, // 100%
@@ -122,8 +147,7 @@ const ReservationCard = ({ reservationDetail }) => {
       <CardImage
         component="img"
         alt="green iguana"
-        height="140"
-        image="https://i.ibb.co/GPj1fBB/11.png"
+        image={image}
       />
       <CardContent>
         {/* <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -131,41 +155,41 @@ const ReservationCard = ({ reservationDetail }) => {
           </Typography> */}
         <TitleContainer>
           <CardTitle variant="h5" component="div">
-            {city}
+            {carName}
           </CardTitle>
           <Icon>
             <Star />
           </Icon>
         </TitleContainer>
-        <CarDetail variant="body2">
+        <CarDetail>
           <ListIcons>
             <DetailIcon sx={{ fontSize: 10 }}>
               <LocalGasStation />
-              <Typography variant="body2" component="span">
+              <Typography component="span">
                 Diesel
               </Typography>
             </DetailIcon>
             <DetailIcon>
               <WbAuto />
-              <Typography variant="body2" component="span">
+              <Typography component="span">
                 Auto
               </Typography>
             </DetailIcon>
             <DetailIcon>
               <AcUnit />
-              <Typography variant="body2" component="span">
+              <Typography component="span">
                 Climate
               </Typography>
             </DetailIcon>
             <DetailIcon>
               <EventSeat />
-              <Typography variant="body2" component="span">
+              <Typography component="span">
                 Comfort
               </Typography>
             </DetailIcon>
             <DetailIcon>
               <PriceCheck />
-              <Typography variant="body2" component="span">
+              <Typography component="span">
                 Eco
               </Typography>
             </DetailIcon>
@@ -174,18 +198,17 @@ const ReservationCard = ({ reservationDetail }) => {
       </CardContent>
       <CardActions>
         <ReservationDetail reservationDetail={reservationDetail} />
-        <CancelButton size="small">Cancel</CancelButton>
+        {user.id === reservationDetail.user_id && (
+          <CancelButton
+            onClick={() => dispatch(cancelReservation(id))}
+            size="small"
+          >
+            Cancel
+          </CancelButton>
+        )}
       </CardActions>
     </CardContainer>
   );
 };
 
 export default ReservationCard;
-
-ReservationCard.propTypes = {
-  reservationDetail: PropTypes.shape({
-    start_date: PropTypes.string.isRequired,
-    end_date: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-  }).isRequired,
-};

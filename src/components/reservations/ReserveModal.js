@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
@@ -14,6 +13,7 @@ import { useSelector } from 'react-redux';
 import ReserveForm from './ReserveForm';
 import store from '../../redux/configureStore';
 import { expandModal } from '../../redux/reservations/reservationsSlice';
+import { mobile } from '../../responsive';
 
 const ReserveBtn = styled(Button)`
   padding: 0.5rem;
@@ -24,26 +24,14 @@ const ReserveBtn = styled(Button)`
   text-align: center !important;
   color: white !important;
   cursor: pointer;
+
   &:hover {
     color: white !important;
     background-color: #9fcf01 !important;
-  } 
-`;
-
-const ActionButton = styled(Button)`
-  padding: 0.5rem;
-  border-radius: 20px;
-  width: 150px;
-  background-color: #f6a40e !important;
-  text-decoration: none;
-  text-align: center !important;
-  color: white !important;
-  transition: all 0.5s ease-in-out;
-  &:hover {
-    color: black !important;
-    background-color: #ffefd5 !important;
-    border: 1px solid #f6a40e !important;
   }
+  ${mobile({
+    margin: '0 1rem 2rem 0',
+  })}
 `;
 
 const Title = styled(DialogTitle)`
@@ -65,14 +53,6 @@ const Content = styled(DialogContent)`
     font-weight: bold;
     font-family: 'Urbanist', sans-serif;
   }`;
-
-const AmountText = styled(Typography)`
-  font-size: 1rem;
-  font-weight: bold;
-  text-shadow: 1px 1px 1px #f6a40e;
-  font-family: 'Urbanist', sans-serif;
-  color: black;
-`;
 
 const DateContainer = styled(Typography)`
   display: flex;
@@ -146,21 +126,10 @@ const ReserveModal = () => {
           <Typography gutterBottom className="desc">
             Reserve this car for a period of time.
           </Typography>
-          <DateContainer>
+          <DateContainer variant="div">
             <ReserveForm />
           </DateContainer>
-          <AmountText>
-            Total Amount:
-            {' '}
-            <span>$</span>
-            <span>0</span>
-          </AmountText>
         </Content>
-        <DialogActions>
-          <ActionButton autoFocus onClick={() => console.log('I was clicked')}>
-            Reserve
-          </ActionButton>
-        </DialogActions>
       </BootstrapDialog>
     </>
   );

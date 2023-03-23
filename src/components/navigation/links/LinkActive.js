@@ -58,7 +58,7 @@ const LinkActive = (props) => {
           </LinkElem>
 
         </ActiveWrapper>
-        { nestedLinks && nestedLinks.map((text) => (
+        {nestedLinks && nestedLinks.map((text) => (
           <NestedLink key={uuidv4()} text={text} />
         ))}
       </Container>

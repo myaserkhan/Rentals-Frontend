@@ -20,7 +20,7 @@ const Container = styled.div`
 const Arrow = styled.div`
     position: absolute;
     pointer-events: ${(props) => (((props.slideIndex === 0 && props.direction === 'left')
-     || ((props.slideIndex === props.carsLength - props.size) && props.direction === 'right')) && 'none')};
+    || ((props.slideIndex === props.carsLength - props.size) && props.direction === 'right')) && 'none')};
     width: 80px;
     height: 50px;
     border-top-${(props) => (props.direction === 'left' ? 'right' : 'left')}-radius: 180px;
