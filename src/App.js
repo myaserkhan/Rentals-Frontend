@@ -20,8 +20,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import { authenticateToken } from './redux/auth/authSlice';
 import { getCars } from './redux/cars/carsSlice';
-import { getCities } from './redux/cities/citiesSlice';
-import { getReservations } from './redux/reservations/reservationsSlice';
+import { getCities, getReservations } from './redux/reservations/reservationsSlice';
 
 const loggedRoutes = Object.entries({
   '/login': <Login />,
@@ -54,9 +53,11 @@ const AppContainer = styled.div`
 `;
 
 const handleTokenAuthentication = (dispatch) => {
-  const token = localStorage.getItem('rcars_jwt');
+  const rcarsJwt = JSON.parse(localStorage.getItem('rcars_jwt'));
+  const token = (rcarsJwt) ? rcarsJwt.token : null;
+
   if (token) {
-    dispatch(authenticateToken());
+    dispatch(authenticateToken(rcarsJwt));
   }
 };
 
@@ -68,7 +69,7 @@ const App = () => {
     handleTokenAuthentication(dispatch);
     dispatch(getCars());
     dispatch(getReservations());
-    dispatch(getCities({ country: 'Pakistan' }));
+    dispatch(getCities());
   }, [isAuthenticated]);
 
   return (
