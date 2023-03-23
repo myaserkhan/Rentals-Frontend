@@ -17,8 +17,8 @@ const FormRow = styled.div`
   width: 100%;
   margin-bottom: 1.5rem;
   ${mobile({
-  'flex-direction': 'column',
-})};
+    'flex-direction': 'column',
+  })};
 `;
 
 const InputWrapper = styled.div`
